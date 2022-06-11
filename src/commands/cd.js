@@ -1,4 +1,4 @@
-export const cd = (path) => {
+export const cd = (path_to_directory) => {
 
-    process.chdir(path);
+    process.chdir(path_to_directory);
 }

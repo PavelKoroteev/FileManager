@@ -3,6 +3,7 @@ import { format } from 'util'
 import { execute } from './execute.js';
 import { i18n } from './i18n.js';
 import { sayReady } from './sayReady.js';
+import { parseInput } from './parseInput.js';
 
 import { up } from '../commands/up.js';
 import { defaultCommand } from '../commands/defaultCommand.js';
@@ -10,7 +11,7 @@ import { cd } from '../commands/cd.js';
 import { exit } from '../commands/exit.js';
 import { ls } from '../commands/ls.js';
 import { cat } from '../commands/cat.js';
-import { parseInput } from './parseInput.js';
+import { add } from '../commands/add.js';
 
 export const listen = () => {
     process.on('uncaughtException', (err) => {
@@ -38,6 +39,7 @@ export const listen = () => {
             cd,
             ls,
             cat,
+            add,
         };
 
         const command = commandsMap[commandName] || defaultCommand;
