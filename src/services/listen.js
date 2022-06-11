@@ -1,7 +1,10 @@
 import stream from 'stream';
+import { format } from 'util'
+import { i18n } from './i18n.js';
+import { sayReady } from './sayReady.js';
 
 export const listen = () => {
-    console.log('listen');
+
     process.stdin.on('data', (data) => {
         const input = data.toString().trim();
 
@@ -10,7 +13,11 @@ export const listen = () => {
                 process.emit('SIGINT');
                 break;
             default:
+                console.log();
+                console.log(format(i18n.commandNotFound, input));
                 break;
         }
+
+        sayReady();
     });
 };
