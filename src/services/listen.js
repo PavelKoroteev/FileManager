@@ -9,6 +9,7 @@ import { defaultCommand } from '../commands/defaultCommand.js';
 import { cd } from '../commands/cd.js';
 import { exit } from '../commands/exit.js';
 import { ls } from '../commands/ls.js';
+import { cat } from '../commands/cat.js';
 import { parseInput } from './parseInput.js';
 
 export const listen = () => {
@@ -36,6 +37,7 @@ export const listen = () => {
             up,
             cd,
             ls,
+            cat,
         };
 
         const command = commandsMap[commandName] || defaultCommand;
