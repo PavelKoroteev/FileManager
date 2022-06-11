@@ -4,6 +4,15 @@ import { i18n } from './i18n.js';
 import { sayReady } from './sayReady.js';
 
 export const listen = () => {
+    process.on('uncaughtException', () => {
+        console.log(i18n.commandError);
+        sayReady();
+    });
+    
+    process.on('unhandledRejection', () => {
+        console.log(i18n.commandError);
+        sayReady();
+    });
 
     process.stdin.on('data', (data) => {
         const input = data.toString().trim();
@@ -14,7 +23,7 @@ export const listen = () => {
                 break;
             default:
                 console.log();
-                console.log(i18n.invalidInput);
+                console.log(i18n.commandNotFound);
                 break;
         }
 
