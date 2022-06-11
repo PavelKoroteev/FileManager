@@ -14,7 +14,7 @@ export const listen = () => {
                 break;
             default:
                 console.log();
-                console.log(format(i18n.commandNotFound, input));
+                console.log(i18n.invalidInput);
                 break;
         }
 
