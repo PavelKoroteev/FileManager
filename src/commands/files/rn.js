@@ -1,15 +1,9 @@
 import fs from 'fs/promises';
-
-const checkUnexist = async (new_filename) => {
-    try {
-        await fs.readFile(new_filename);
-    } catch (e) {
-        return;
-    }
-    throw new Error(`File with name "${new_filename}" already exist`);
-};
+import { existsSync } from 'fs';
 
 export const rn = async (path_to_file, new_filename) => {
-    await checkUnexist(new_filename);
+    if (existsSync(new_filename)) {
+        throw new Error('File is exist');        
+    }
     await fs.rename(path_to_file, new_filename);
 }
