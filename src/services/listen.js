@@ -13,6 +13,7 @@ import { ls } from '../commands/ls.js';
 import { cat } from '../commands/cat.js';
 import { add } from '../commands/add.js';
 import { rn } from '../commands/rn.js';
+import { cp } from '../commands/cp.js';
 
 export const listen = () => {
     process.on('uncaughtException', (err) => {
@@ -42,6 +43,7 @@ export const listen = () => {
             cat,
             add,
             rn,
+            cp,
         };
 
         const command = commandsMap[commandName] || defaultCommand;
