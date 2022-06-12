@@ -1,8 +1,23 @@
-import fs from 'fs/promises';
+import fs from 'fs';
 import { createHash } from 'crypto';
+import { pipeline, } from 'stream/promises';
+import { Writable, } from 'stream';
 
 export const hash = async (path_to_file) => {
-    const file = await fs.readFile(path_to_file, 'utf-8');
+    const hashGenerator = createHash('SHA256');
 
-    console.log(createHash('SHA256').update(file).digest('hex'));
-}
+    const hashUpdater = new Writable();
+
+    hashUpdater.on('data', (chunk) => {
+        hashGenerator.update(chunk);
+    });
+
+    const readStream = fs.createReadStream(path_to_file, 'utf-8');
+
+    await pipeline(
+        readStream,
+        hashUpdater
+    );
+
+    console.log(hashGenerator.digest("hex"));
+};
