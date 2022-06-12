@@ -1,20 +1,20 @@
-import stream from 'stream';
-import { format } from 'util'
 import { execute } from './execute.js';
 import { i18n } from './i18n.js';
 import { sayReady } from './sayReady.js';
 import { parseInput } from './parseInput.js';
 
-import { up } from '../commands/up.js';
 import { defaultCommand } from '../commands/defaultCommand.js';
-import { cd } from '../commands/cd.js';
 import { exit } from '../commands/exit.js';
-import { ls } from '../commands/ls.js';
-import { cat } from '../commands/cat.js';
-import { add } from '../commands/add.js';
-import { rn } from '../commands/rn.js';
-import { cp } from '../commands/cp.js';
-import { rm } from '../commands/rm.js';
+
+import { up } from '../commands/navigation/up.js';
+import { cd } from '../commands/navigation/cd.js';
+import { ls } from '../commands/navigation/ls.js';
+
+import { cat } from '../commands/files/cat.js';
+import { add } from '../commands/files/add.js';
+import { rn } from '../commands/files/rn.js';
+import { cp } from '../commands/files/cp.js';
+import { rm } from '../commands/files/files/rm.js';
 
 export const listen = () => {
     process.on('uncaughtException', (err) => {
@@ -50,20 +50,6 @@ export const listen = () => {
         };
 
         const command = commandsMap[commandName] || defaultCommand;
-        // switch (commandName) {
-        //     case '.exit':
-        //         command = exit;
-        //         break;
-        //     case 'up':
-        //         command = up;
-        //         break;
-        //     case 'cd':
-        //         command = cd;
-        //         break;
-        //     default:
-        //         command = defaultCommand;
-        //         break;
-        // }
 
         await execute(command, args);
 
