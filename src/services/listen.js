@@ -18,6 +18,11 @@ import { rm } from '../commands/files/rm.js';
 
 import { os } from '../commands/os/os.js';
 
+import { hash } from '../commands/hash/hash.js';
+
+import { compress } from '../commands/zip/compress.js';
+import { decompress } from '../commands/zip/decompress.js';
+
 export const listen = () => {
     process.on('uncaughtException', (err) => {
         console.log(i18n.commandError);
@@ -51,6 +56,11 @@ export const listen = () => {
             rm,
 
             os,
+
+            hash,
+
+            compress,
+            decompress,
         };
 
         const command = commandsMap[commandName] || defaultCommand;
